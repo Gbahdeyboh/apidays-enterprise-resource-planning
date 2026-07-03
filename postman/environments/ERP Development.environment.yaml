@@ -30,3 +30,6 @@ values:
   - key: status
     value: active
     description: '[object Object]'
+  - key: lastCreatedEmployeeId
+    value: 'emp-1783005200082'
+    description: '[object Object]'
