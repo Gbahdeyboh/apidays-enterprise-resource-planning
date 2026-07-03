@@ -131,7 +131,8 @@ export const getEmployees = async (status?: string) => {
 export const getEmployee = async (id: string) => {
   const response = await api.get(`/api/hr/employees/${id}`)
   const raw = response.data?.data ?? response.data
-  return normaliseEmployee(raw)
+  // This endpoint returns the identifier as `employee-id` rather than `id`.
+  return normaliseEmployee(raw ? { ...raw, id: raw['employee-id'] } : raw)
 }
 
 export const createEmployee = async (data: any) => {

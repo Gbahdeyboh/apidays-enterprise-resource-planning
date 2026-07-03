@@ -305,7 +305,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employee'
+                $ref: '#/components/schemas/EmployeeDetail'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '404':
@@ -1139,6 +1139,42 @@ components:
         departmentId:
           type: string
         # Both `position` and `jobTitle` are returned for compatibility
+        position:
+          type: string
+        jobTitle:
+          type: string
+        salary:
+          type: number
+        hireDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [active, inactive, on_leave, terminated]
+        department:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+
+    # Response schema for GET /api/hr/employees/{id}. Identical to Employee
+    # except the identifier is returned as `employee-id` instead of `id`.
+    EmployeeDetail:
+      type: object
+      properties:
+        employee-id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        departmentId:
+          type: string
         position:
           type: string
         jobTitle:

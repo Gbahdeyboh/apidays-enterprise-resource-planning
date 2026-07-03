@@ -564,7 +564,9 @@ def create_app() -> Flask:
         e = db.session.get(Employee, employee_id)
         if e is None:
             return jsonify({'error': 'Employee not found'}), 404
-        return jsonify(serialize_employee(e))
+        payload = serialize_employee(e)
+        payload['employee-id'] = payload.pop('id')
+        return jsonify(payload)
     
     @app.route('/api/hr/employees/<employee_id>', methods=['PUT'])
     def update_employee(employee_id):
