@@ -86,7 +86,8 @@ export const getDemoShipments = async () => {
 function normaliseEmployee(emp: any) {
   if (!emp) return emp
   return {
-    id: String(emp.id),
+    // Create Employee returns "employee-id"; other endpoints still return "id".
+    id: String(emp.id ?? emp['employee-id'] ?? ''),
     firstName: emp.firstName ?? emp.first_name ?? '',
     lastName: emp.lastName ?? emp.last_name ?? '',
     email: emp.email ?? '',

@@ -130,9 +130,14 @@ def create_employee():
 
     mock_employees.append(new_employee)
 
+    # Internal storage keeps "id" for lookups in other routes; the response
+    # exposes it as "employee-id" per the documented API schema.
+    response_employee = dict(new_employee)
+    response_employee["employee-id"] = response_employee.pop("id")
+
     return jsonify({
         "success": True,
-        "data": new_employee,
+        "data": response_employee,
         "message": "Employee created successfully",
         "timestamp": datetime.utcnow().isoformat() + 'Z'
     }), 201
