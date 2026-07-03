@@ -541,11 +541,7 @@ def create_app() -> Flask:
         )
         db.session.add(emp)
         db.session.commit()
-        # Create Employee exposes the identifier as "employee-id" per the
-        # documented schema; other employee endpoints still return "id".
-        employee_data = serialize_employee(emp)
-        employee_data["employee-id"] = employee_data.pop("id")
-        return jsonify(employee_data), 201
+        return jsonify(serialize_employee(emp)), 201
     
     @app.route('/api/hr/employees', methods=['GET'])
     def get_all_employees():
